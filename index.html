@@ -299,7 +299,8 @@
             display: flex;
             gap: 1.5rem;
             justify-content: center;
-            margin: 3rem 0;
+            margin: 3rem auto;
+            max-width: 700px;
             flex-wrap: wrap;
             animation: fadeIn 2s ease-out 2s both;
         }
@@ -357,7 +358,8 @@
             overflow: hidden;
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
-            margin-top: 2rem;
+            margin: 2rem auto 4rem auto;
+            max-width: 700px;
         }
 
         .hidden-message.revealed {
@@ -573,51 +575,961 @@
             }
         }
 
-        /* Love Letter */
-        .love-letter {
-            max-width: 700px;
-            margin: 4rem auto;
-            background: rgba(255, 245, 247, 0.05);
-            backdrop-filter: blur(15px);
-            border: 2px solid rgba(255, 179, 217, 0.2);
-            border-radius: 25px;
-            padding: 3rem;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 2s ease-out 5s both;
+        /* ============================================
+           ANIME POSTMAN DELIVERY ANIMATION - REALISTIC
+           ============================================ */
+        
+        .postman-scene {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .postman-scene.delivered {
+            display: none;
+        }
+
+        /* Postman with bicycle */
+        .postman {
+            position: absolute;
+            left: -250px;
+            bottom: 60px;
+            transform-origin: center bottom;
+        }
+
+        /* Animation will be triggered by JavaScript on scroll */
+        .postman.animate {
+            animation: cycleIn 4.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes cycleIn {
+            0% {
+                left: -250px;
+                transform: translateY(0) scale(1);
+            }
+            15% {
+                transform: translateY(-3px) scale(1);
+            }
+            30% {
+                transform: translateY(0) scale(1);
+            }
+            43% {
+                left: 38%;
+                transform: translateY(-2px) scale(1);
+            }
+            46% {
+                left: 40%;
+                transform: translateY(0) scale(1);
+            }
+            48% {
+                left: 41%;
+                transform: translateY(-5px) scale(1.02);
+            }
+            52% {
+                left: 42%;
+                transform: translateY(2px) scale(0.98);
+            }
+            56% {
+                left: 42%;
+                transform: translateY(0) scale(1);
+            }
+            70% {
+                transform: translateY(-2px) scale(1);
+            }
+            85% {
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                left: 130%;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .bicycle {
+            width: 180px;
+            height: 120px;
             position: relative;
         }
 
-        .love-letter::before {
-            content: '💌';
+        /* Bicycle frame - more detailed */
+        .bicycle-frame {
             position: absolute;
-            top: -30px;
+            width: 100px;
+            height: 60px;
+            left: 40px;
+            top: 25px;
+        }
+
+        /* Main frame tubes */
+        .bicycle-frame::before {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(to right, #FF006E, #C8005C);
+            transform: rotate(-25deg);
+            top: 18px;
+            left: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            border-radius: 2px;
+        }
+
+        .bicycle-frame::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 4px;
+            background: linear-gradient(to right, #FF006E, #C8005C);
+            transform: rotate(35deg);
+            top: 22px;
+            left: 25px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            border-radius: 2px;
+        }
+
+        /* Seat post */
+        .bicycle-seat {
+            position: absolute;
+            width: 3px;
+            height: 25px;
+            background: #2D1B3D;
+            left: 75px;
+            top: 10px;
+        }
+
+        .bicycle-seat::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 8px;
+            background: #8B4513;
+            border-radius: 5px;
+            top: -5px;
+            left: -8px;
+            border: 2px solid #2D1B3D;
+        }
+
+        /* Handlebars */
+        .bicycle-handlebar {
+            position: absolute;
+            width: 25px;
+            height: 3px;
+            background: #2D1B3D;
+            right: 5px;
+            top: 15px;
+            border-radius: 2px;
+        }
+
+        .bicycle-handlebar::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 15px;
+            background: #2D1B3D;
+            left: 50%;
+            top: 3px;
+            transform: translateX(-50%);
+        }
+
+        /* Pedals and crank animation */
+        .bicycle-pedal {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            left: 55px;
+            bottom: 15px;
+        }
+
+        .postman.animate .bicycle-pedal {
+            animation: pedalRotate 0.6s linear infinite;
+        }
+
+        @keyframes pedalRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .bicycle-pedal::before,
+        .bicycle-pedal::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 5px;
+            background: #2D1B3D;
+            border-radius: 3px;
+            top: 50%;
+            left: 50%;
+        }
+
+        .bicycle-pedal::before {
+            transform: translate(-50%, -50%) translateX(-15px);
+        }
+
+        .bicycle-pedal::after {
+            transform: translate(-50%, -50%) translateX(15px);
+        }
+
+        /* Bicycle wheels - larger and more detailed */
+        .bicycle-wheel {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 4px solid #2D1B3D;
+            border-radius: 50%;
+            bottom: 0;
+            background: radial-gradient(circle, #FFB3D9 0%, #FFF 10%, transparent 20%);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .bicycle-wheel.front {
+            right: 5px;
+        }
+
+        .bicycle-wheel.back {
+            left: 5px;
+        }
+
+        /* Wheel rotation only when postman is animating */
+        .postman.animate .bicycle-wheel {
+            animation: wheelRotate 0.5s linear infinite;
+        }
+
+        @keyframes wheelRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Wheel spokes - more realistic */
+        .bicycle-wheel::before,
+        .bicycle-wheel::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #2D1B3D, transparent);
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .bicycle-wheel::after {
+            transform: translateY(-50%) rotate(90deg);
+        }
+
+        /* Additional spokes */
+        .bicycle-wheel-spoke {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, rgba(45, 27, 61, 0.6), transparent);
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .bicycle-wheel-spoke:nth-child(2) {
+            transform: translateY(-50%) rotate(135deg);
+        }
+
+        /* Postman character - more realistic proportions */
+        .postman-character {
+            position: absolute;
+            left: 60px;
+            top: -40px;
+            width: 60px;
+            height: 70px;
+        }
+
+        /* Animated body bobbing while cycling */
+        .postman.animate .postman-character {
+            animation: bodyBob 0.6s ease-in-out infinite;
+        }
+
+        @keyframes bodyBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-2px); }
+        }
+
+        /* Head */
+        .postman-head {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: radial-gradient(circle at 30% 30%, #FFE4CC, #FFD7BA);
+            border-radius: 50%;
+            top: 0;
+            left: 14px;
+            border: 2px solid #2D1B3D;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Eyes */
+        .postman-head::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #2D1B3D;
+            border-radius: 50%;
+            top: 12px;
+            left: 8px;
+            box-shadow: 10px 0 0 #2D1B3D;
+        }
+
+        /* Smile */
+        .postman-head::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 6px;
+            border: 2px solid #2D1B3D;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            top: 18px;
+            left: 8px;
+        }
+
+        /* Cap */
+        .postman-cap {
+            position: absolute;
+            width: 36px;
+            height: 14px;
+            background: linear-gradient(to bottom, #FF006E, #C8005C);
+            border-radius: 50% 50% 0 0;
+            top: -10px;
+            left: 12px;
+            border: 2px solid #2D1B3D;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .postman-cap::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 7px;
+            background: linear-gradient(to right, #FF006E, #C8005C);
+            right: -14px;
+            top: 7px;
+            border-radius: 0 10px 10px 0;
+            border: 2px solid #2D1B3D;
+            border-left: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Body */
+        .postman-body {
+            position: absolute;
+            width: 32px;
+            height: 38px;
+            background: linear-gradient(to bottom, #5AA5E8, #4A90E2);
+            border-radius: 6px;
+            top: 30px;
+            left: 14px;
+            border: 2px solid #2D1B3D;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Buttons on uniform */
+        .postman-body::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #FFD700;
+            border-radius: 50%;
+            top: 8px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 3rem;
-            filter: drop-shadow(0 5px 15px rgba(255, 0, 110, 0.5));
+            box-shadow: 0 10px 0 #FFD700, 0 20px 0 #FFD700;
         }
 
-        .love-letter h3 {
+        /* Arms - animated while cycling */
+        .postman-arm {
+            position: absolute;
+            width: 20px;
+            height: 9px;
+            background: linear-gradient(to right, #5AA5E8, #4A90E2);
+            border-radius: 10px;
+            border: 2px solid #2D1B3D;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .postman-arm.left {
+            top: 38px;
+            left: 4px;
+            transform-origin: right center;
+            transform: rotate(-50deg);
+        }
+
+        .postman-arm.right {
+            top: 38px;
+            right: 4px;
+            transform-origin: left center;
+            transform: rotate(50deg);
+        }
+
+        /* Arm movement while cycling */
+        .postman.animate .postman-arm.left {
+            animation: armMoveLeft 0.6s ease-in-out infinite;
+        }
+
+        .postman.animate .postman-arm.right {
+            animation: armMoveRight 0.6s ease-in-out infinite;
+        }
+
+        @keyframes armMoveLeft {
+            0%, 100% { transform: rotate(-50deg); }
+            50% { transform: rotate(-45deg); }
+        }
+
+        @keyframes armMoveRight {
+            0%, 100% { transform: rotate(50deg); }
+            50% { transform: rotate(45deg); }
+        }
+
+        /* Legs - animated pedaling */
+        .postman-leg {
+            position: absolute;
+            width: 8px;
+            height: 25px;
+            background: #2D1B3D;
+            border-radius: 4px;
+            bottom: -25px;
+            left: 50%;
+            transform-origin: top center;
+        }
+
+        .postman-leg.left {
+            transform: translateX(-8px);
+        }
+
+        .postman-leg.right {
+            transform: translateX(0px);
+        }
+
+        .postman.animate .postman-leg.left {
+            animation: legPedalLeft 0.6s linear infinite;
+        }
+
+        .postman.animate .postman-leg.right {
+            animation: legPedalRight 0.6s linear infinite;
+        }
+
+        @keyframes legPedalLeft {
+            0% { transform: translateX(-8px) rotate(0deg); }
+            50% { transform: translateX(-8px) rotate(30deg); }
+            100% { transform: translateX(-8px) rotate(0deg); }
+        }
+
+        @keyframes legPedalRight {
+            0% { transform: translateX(0px) rotate(30deg); }
+            50% { transform: translateX(0px) rotate(0deg); }
+            100% { transform: translateX(0px) rotate(30deg); }
+        }
+
+        /* Bag */
+        .postman-bag {
+            position: absolute;
+            width: 22px;
+            height: 18px;
+            background: linear-gradient(to bottom, #A0522D, #8B4513);
+            border-radius: 4px;
+            top: 42px;
+            right: -10px;
+            border: 2px solid #2D1B3D;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .postman-bag::before {
+            content: '';
+            position: absolute;
+            width: 28px;
+            height: 3px;
+            background: #8B4513;
+            border: 1px solid #2D1B3D;
+            top: -10px;
+            left: -6px;
+            border-radius: 5px;
+        }
+
+        /* Bag buckle */
+        .postman-bag::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 6px;
+            background: #FFD700;
+            border: 1px solid #2D1B3D;
+            border-radius: 2px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Flying letter */
+        .flying-letter {
+            position: absolute;
+            width: 60px;
+            height: 45px;
+            background: linear-gradient(135deg, #F5CAD1, #E8B4BC);
+            border-radius: 5px;
+            border: 2px solid #2D1B3D;
+            left: 42%;
+            bottom: 80px;
+            opacity: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+        }
+
+        /* Letter throw animation triggered by JavaScript */
+        .flying-letter.animate {
+            animation: letterThrow 1.5s ease-out 2.5s forwards;
+        }
+
+        .flying-letter::before {
+            content: '💌';
+            position: absolute;
+            font-size: 1.5rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes letterThrow {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotate(0deg) scale(0.5);
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(-50px) rotate(-180deg) scale(1);
+            }
+            50% {
+                transform: translateY(-30px) rotate(-360deg) scale(1.1);
+            }
+            70% {
+                transform: translateY(20px) rotate(-450deg) scale(1);
+            }
+            85% {
+                transform: translateY(0) rotate(-520deg) scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(10px) rotate(-540deg) scale(1);
+            }
+        }
+
+        /* Ground/Road */
+        .road {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 3px;
+            background: repeating-linear-gradient(
+                90deg,
+                #FFB3D9 0px,
+                #FFB3D9 20px,
+                transparent 20px,
+                transparent 40px
+            );
+            opacity: 0.5;
+        }
+
+        /* Speed lines for effect */
+        .speed-line {
+            position: absolute;
+            height: 2px;
+            background: rgba(255, 179, 217, 0.6);
+            top: 50%;
+            opacity: 0;
+        }
+
+        /* Speed lines only when postman is animating */
+        .postman-scene.animating .speed-line {
+            animation: speedLine 0.8s ease-out infinite;
+        }
+
+        .speed-line:nth-child(1) {
+            width: 30px;
+            animation-delay: 0s;
+        }
+
+        .speed-line:nth-child(2) {
+            width: 20px;
+            animation-delay: 0.2s;
+            top: 55%;
+        }
+
+        .speed-line:nth-child(3) {
+            width: 25px;
+            animation-delay: 0.4s;
+            top: 45%;
+        }
+
+        @keyframes speedLine {
+            0% {
+                left: 40%;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                left: 20%;
+                opacity: 0;
+            }
+        }
+
+        /* Landed letter (clickable) */
+        .landed-letter {
+            position: absolute;
+            width: 80px;
+            height: 60px;
+            background: linear-gradient(135deg, #F5CAD1, #E8B4BC);
+            border-radius: 8px;
+            border: 3px solid #2D1B3D;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+            opacity: 0;
+        }
+
+        .landed-letter.visible {
+            opacity: 1;
+            animation: letterLand 0.5s ease-out 4s forwards, landedLetterFloat 2s ease-in-out 4.5s infinite;
+        }
+
+        @keyframes letterLand {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) scale(0.5) rotate(-540deg);
+            }
+            60% {
+                transform: translateX(-50%) scale(1.1) rotate(0deg);
+            }
+            80% {
+                transform: translateX(-50%) scale(0.95) rotate(0deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes landedLetterFloat {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        .landed-letter:hover {
+            transform: translateX(-50%) scale(1.1);
+            box-shadow: 0 12px 30px rgba(255, 0, 110, 0.5);
+        }
+
+        .landed-letter::before {
+            content: '💌';
+            position: absolute;
+            font-size: 2rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+        }
+
+        .landed-letter::after {
+            content: 'Click me!';
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
             font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            color: var(--blush);
+            white-space: nowrap;
+            animation: clickPrompt 1.5s ease-in-out infinite;
+        }
+
+        @keyframes clickPrompt {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Sparkles around landed letter */
+        .sparkle {
+            position: absolute;
+            font-size: 1.2rem;
+            animation: sparkleAnim 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkleAnim {
+            0%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .sparkle:nth-child(1) {
+            top: -10px;
+            left: -15px;
+            animation-delay: 0s;
+        }
+
+        .sparkle:nth-child(2) {
+            top: -10px;
+            right: -15px;
+            animation-delay: 0.5s;
+        }
+
+        .sparkle:nth-child(3) {
+            bottom: 10px;
+            left: -20px;
+            animation-delay: 1s;
+        }
+
+        .sparkle:nth-child(4) {
+            bottom: 10px;
+            right: -20px;
+            animation-delay: 1.5s;
+        }
+
+        /* ============================================
+           3D LOVE LETTER ENVELOPE ANIMATION
+           ============================================ */
+        
+        .love-letter-container {
+            max-width: 700px;
+            margin: 6rem auto 8rem auto;
+            perspective: 2000px;
+            min-height: 600px;
+            display: none;
+        }
+
+        .love-letter-container.show {
+            display: block;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .letter-instruction {
+            text-align: center;
+            font-size: 1.4rem;
+            color: var(--blush);
+            margin-bottom: 2rem;
+            font-family: 'Dancing Script', cursive;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+        }
+
+        .envelope-wrapper:hover {
+            transform: scale(1.02);
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            transform-style: preserve-3d;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .envelope.opened {
+            transform: translateY(-20px);
+        }
+
+        /* Envelope Back */
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #E8B4BC, #D89DAA);
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        /* Envelope Flap */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #F5CAD1, #E8B4BC);
+            transform-origin: top center;
+            transform: rotateX(0deg);
+            transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 3;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 50%, 0 100%);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .envelope.opened .envelope-flap {
+            transform: rotateX(-180deg);
+        }
+
+        /* Wax Seal */
+        .wax-seal {
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #C8005C, #8B0042);
+            border-radius: 50%;
+            z-index: 4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 2.5rem;
+            box-shadow: 
+                0 5px 20px rgba(200, 0, 92, 0.6),
+                inset 0 -3px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.8s ease;
+        }
+
+        .envelope.opened .wax-seal {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0) rotate(360deg);
+        }
+
+        /* Letter Paper */
+        .letter-paper {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%) translateY(0);
+            width: 90%;
+            max-height: 450px;
+            background: linear-gradient(to bottom, #FFFBF5, #FFF8F0);
+            border-radius: 10px;
+            padding: 2.5rem 2rem;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            z-index: 2;
+            transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            opacity: 0;
+            pointer-events: none;
+            overflow-y: auto;
+        }
+
+        .envelope.opened .letter-paper {
+            transform: translateX(-50%) translateY(-80px);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Letter decorative header */
+        .letter-paper::before {
+            content: '💌';
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.8rem;
+            filter: drop-shadow(0 5px 15px rgba(255, 0, 110, 0.5));
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .letter-paper h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
             color: var(--rose);
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
-        .love-letter p {
-            font-size: 1.25rem;
-            line-height: 1.9;
-            color: var(--cream);
-            margin-bottom: 1.5rem;
+        .letter-paper p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #2D1B3D;
+            margin-bottom: 1rem;
+            text-align: justify;
         }
 
-        .love-letter .signature-text {
+        .letter-paper .greeting {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            color: var(--deep-rose);
+            margin-bottom: 0.8rem;
+        }
+
+        .letter-paper .signature-text {
             text-align: right;
             font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: var(--rose);
-            margin-top: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Decorative elements on letter */
+        .letter-paper::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="80" font-size="80" fill="%23FF006E">❤️</text></svg>') no-repeat center;
+            background-size: contain;
+            opacity: 0.3;
+        }
+
+        /* Hearts particles when opening */
+        .heart-particle {
+            position: absolute;
+            font-size: 1.5rem;
+            pointer-events: none;
+            animation: heartBurst 1.5s ease-out forwards;
+            z-index: 100;
+        }
+
+        @keyframes heartBurst {
+            0% {
+                transform: translate(0, 0) scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         /* Memories Grid */
@@ -776,7 +1688,7 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 3rem 2rem 2rem 2rem;
             font-size: 1.1rem;
             color: var(--blush);
             animation: fadeIn 2.5s ease-out 6s both;
@@ -793,13 +1705,77 @@
             margin-top: 1rem;
         }
 
+        .social-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 179, 217, 0.2);
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 179, 217, 0.2);
+            border-radius: 50px;
+            color: var(--blush);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 179, 217, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 0, 110, 0.3);
+            border-color: var(--rose);
+            color: var(--rose);
+        }
+
+        .social-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover .social-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero {
                 padding: 2rem 1rem;
             }
 
-            .message-card, .love-letter {
+            .message-card {
                 padding: 2rem;
                 margin: 2rem auto;
             }
@@ -817,6 +1793,33 @@
             .memory-grid {
                 grid-template-columns: 1fr;
                 grid-template-rows: auto;
+            }
+
+            .envelope {
+                height: 350px;
+            }
+
+            .letter-paper {
+                padding: 2rem 1.5rem;
+            }
+
+            .letter-paper h3 {
+                font-size: 2rem;
+            }
+
+            .letter-paper p {
+                font-size: 1.1rem;
+            }
+
+            .social-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .social-link {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
             }
         }
     </style>
@@ -846,21 +1849,89 @@
             </div>
         </div>
 
-        <!-- Message Card -->
-        <div class="message-card">
-            <h2>To the Love of My Life</h2>
-            <p>Every moment with you feels like a beautiful dream I never want to wake up from. Your smile lights up my darkest days, and your laugh is my favorite melody.</p>
-            <p>You are my best friend, my partner in crime, and the person I want to share every sunset with. Thank you for being you, for loving me, and for making every day an adventure.</p>
-            <p>This Valentine's Day, and every day, I choose you. Today, tomorrow, and always.</p>
+        <!-- ANIME POSTMAN DELIVERY SCENE -->
+        <div class="postman-scene" id="postmanScene">
+            <!-- Road -->
+            <div class="road"></div>
             
-            <div class="button-group">
-                <button class="btn" onclick="revealMessage()">Click for a Secret</button>
-                <button class="btn" onclick="showLoveNotes()">Love Notes</button>
+            <!-- Speed lines -->
+            <div class="speed-line"></div>
+            <div class="speed-line"></div>
+            <div class="speed-line"></div>
+            
+            <!-- Postman with bicycle -->
+            <div class="postman" id="postman">
+                <div class="bicycle">
+                    <div class="bicycle-frame"></div>
+                    <div class="bicycle-seat"></div>
+                    <div class="bicycle-handlebar"></div>
+                    <div class="bicycle-pedal"></div>
+                    <div class="bicycle-wheel back">
+                        <div class="bicycle-wheel-spoke"></div>
+                        <div class="bicycle-wheel-spoke"></div>
+                    </div>
+                    <div class="bicycle-wheel front">
+                        <div class="bicycle-wheel-spoke"></div>
+                        <div class="bicycle-wheel-spoke"></div>
+                    </div>
+                </div>
+                <div class="postman-character">
+                    <div class="postman-head"></div>
+                    <div class="postman-cap"></div>
+                    <div class="postman-body"></div>
+                    <div class="postman-arm left"></div>
+                    <div class="postman-arm right"></div>
+                    <div class="postman-leg left"></div>
+                    <div class="postman-leg right"></div>
+                    <div class="postman-bag"></div>
+                </div>
             </div>
+            
+            <!-- Flying letter (thrown by postman) -->
+            <div class="flying-letter" id="flyingLetter"></div>
+            
+            <!-- Landed letter (clickable) -->
+            <div class="landed-letter" id="landedLetter" onclick="openLetterScene()">
+                <div class="sparkle">✨</div>
+                <div class="sparkle">✨</div>
+                <div class="sparkle">⭐</div>
+                <div class="sparkle">💫</div>
+            </div>
+        </div>
 
-            <div class="hidden-message" id="secretMessage">
-                <p>✨ You are my today and all of my tomorrows. I love you more than words could ever express! ✨</p>
+        <!-- 3D LOVE LETTER WITH ENVELOPE ANIMATION -->
+        <div class="love-letter-container" id="letterContainer">
+            
+            <div class="envelope-wrapper" onclick="openEnvelope()">
+                <div class="envelope" id="envelope">
+                    <!-- Envelope Back -->
+                    <div class="envelope-back"></div>
+                    
+                    <!-- Envelope Flap -->
+                    <div class="envelope-flap"></div>
+                    
+                    <!-- Wax Seal -->
+                    <div class="wax-seal">💝</div>
+                    
+                    <!-- Letter Paper -->
+                    <div class="letter-paper">
+                        <h3>A Letter to My Heart</h3>
+                        <p class="greeting">My Dearest Love,</p>
+                        <p>রোজ সকালে তোরই ছোয়ায়, কাটবে আমার ঘুম। রিনিঝিনি নুপুর দোলায়, থাকবে ভরে রুম। ঘুড়ির সাথে লাগানো আছে, তোর মনের নাটাই, ভুল বুঝে করিসনা যেনো, হৃদয় থেকে ছাটাই."আদর দেবো, সোহাগ দেবো, দেবো ভালোবাসা, হাজার কষ্টেও পূরণ করব, মনের সকল আশা.</p>
+                        <p class="signature-text">Yours eternally, ❤️</p>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <!-- Interactive Buttons -->
+        <div class="button-group">
+            <button class="btn" onclick="revealMessage()">Click for a Secret</button>
+            <button class="btn" onclick="showLoveNotes()">Love Notes</button>
+        </div>
+
+        <div class="hidden-message" id="secretMessage">
+            <p>✨ You are my today and all of my tomorrows. I love you more than words could ever express! ✨</p>
         </div>
 
         <!-- Romantic Quotes -->
@@ -921,15 +1992,6 @@
             </div>
         </div>
 
-        <!-- Love Letter -->
-        <div class="love-letter">
-            <h3>A Letter to My Heart</h3>
-            <p>My Dearest Love,</p>
-            <p>Words will never be enough to express how deeply I cherish you. You've painted my world with colors I never knew existed. Your presence is the warmth in my cold days, the light in my darkness, and the peace in my chaos.</p>
-            <p>Every laugh we share, every dream we build, every moment we steal—they're all precious treasures I hold close to my heart. You make ordinary days extraordinary just by being in them.</p>
-            <p>Thank you for choosing me, for loving me, for being my everything. Here's to forever with you, my valentine, my forever.</p>
-            <p class="signature-text">Yours eternally, ❤️</p>
-        </div>
 
         <!-- Memories Grid -->
         <div class="memories-section">
@@ -1002,6 +2064,28 @@
             <p>Made with 💖 just for you</p>
             <p class="signature">With All My Love</p>
             <p>Happy Valentine's Day 2026!</p>
+            
+            <div class="social-links">
+                <a href="https://github.com/protech-sukalpa-7" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <span class="social-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </span>
+                    <span>GitHub</span>
+                </a>
+                
+                <a href="https://www.linkedin.com/in/sukalpa-manna-095168322/" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <span class="social-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </span>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+            
+            <p class="copyright">© 2026 Sukalpa Manna | Created with love ❤️</p>
         </footer>
     </div>
 
@@ -1029,6 +2113,127 @@
             particle.style.width = (Math.random() * 6 + 4) + 'px';
             particle.style.height = particle.style.width;
             document.body.appendChild(particle);
+        }
+
+        // Scroll-triggered postman animation
+        let postmanAnimated = false;
+
+        function checkPostmanScroll() {
+            if (postmanAnimated) return;
+
+            const postmanScene = document.getElementById('postmanScene');
+            const rect = postmanScene.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            // Trigger when postman scene is 60% visible in viewport
+            if (rect.top < windowHeight * 0.6 && rect.bottom > 0) {
+                startPostmanAnimation();
+                postmanAnimated = true;
+            }
+        }
+
+        function startPostmanAnimation() {
+            const postman = document.getElementById('postman');
+            const flyingLetter = document.getElementById('flyingLetter');
+            const landedLetter = document.getElementById('landedLetter');
+            const postmanScene = document.getElementById('postmanScene');
+
+            // Start postman cycling animation
+            postman.classList.add('animate');
+            
+            // Add animating class to scene for speed lines
+            postmanScene.classList.add('animating');
+
+            // Start letter throw animation
+            flyingLetter.classList.add('animate');
+
+            // Make landed letter visible after animation
+            setTimeout(() => {
+                landedLetter.classList.add('visible');
+                postmanScene.classList.remove('animating');
+            }, 4000);
+        }
+
+        // Add scroll event listener
+        window.addEventListener('scroll', checkPostmanScroll);
+        
+        // Check on page load in case already scrolled
+        window.addEventListener('load', checkPostmanScroll);
+
+        // Open letter scene when landed letter is clicked
+        function openLetterScene() {
+            const postmanScene = document.getElementById('postmanScene');
+            const letterContainer = document.getElementById('letterContainer');
+            const landedLetter = document.getElementById('landedLetter');
+            
+            // Create heart burst effect
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart';
+                    heart.textContent = ['💖', '💝', '💗', '💕', '❤️'][Math.floor(Math.random() * 5)];
+                    
+                    const rect = landedLetter.getBoundingClientRect();
+                    heart.style.left = rect.left + rect.width / 2 + (Math.random() - 0.5) * 100 + 'px';
+                    heart.style.top = rect.top + rect.height / 2 + (Math.random() - 0.5) * 100 + 'px';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 30);
+            }
+            
+            // Hide postman scene and show letter container
+            setTimeout(() => {
+                postmanScene.classList.add('delivered');
+                letterContainer.classList.add('show');
+                
+                // Auto-open envelope after a moment
+                setTimeout(() => {
+                    openEnvelope();
+                }, 800);
+            }, 500);
+        }
+
+        // 3D Envelope Opening Function
+        let envelopeOpened = false;
+        function openEnvelope() {
+            const envelope = document.getElementById('envelope');
+            
+            if (!envelopeOpened) {
+                envelope.classList.add('opened');
+                envelopeOpened = true;
+                
+                // Create heart burst effect
+                const wrapper = envelope.parentElement;
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.className = 'heart-particle';
+                        heart.textContent = ['💖', '💝', '💗', '💕', '❤️'][Math.floor(Math.random() * 5)];
+                        
+                        const angle = (Math.PI * 2 * i) / 20;
+                        const distance = 100 + Math.random() * 100;
+                        const tx = Math.cos(angle) * distance;
+                        const ty = Math.sin(angle) * distance;
+                        
+                        heart.style.setProperty('--tx', tx + 'px');
+                        heart.style.setProperty('--ty', ty + 'px');
+                        heart.style.left = '50%';
+                        heart.style.top = '40%';
+                        
+                        wrapper.appendChild(heart);
+                        setTimeout(() => heart.remove(), 1500);
+                    }, i * 50);
+                }
+                
+                // Create floating hearts
+                for(let i = 0; i < 15; i++) {
+                    setTimeout(() => createRandomHeart(), i * 100);
+                }
+            } else {
+                envelope.classList.remove('opened');
+                envelopeOpened = false;
+            }
         }
 
         // Toggle quote reveal with heart burst

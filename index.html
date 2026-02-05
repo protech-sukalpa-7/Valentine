@@ -154,12 +154,12 @@
 
         .heart-instruction {
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             color: var(--blush);
             animation: fadeIn 2s ease-out 1.5s both;
             font-family: 'Dancing Script', cursive;
             position: absolute;
-            top: 10%;
+            top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
@@ -1879,6 +1879,41 @@
                 width: 100%;
                 max-width: 250px;
                 justify-content: center;
+            }
+
+            /* Quote cards responsive adjustments */
+            .quotes-section {
+                padding: 0 1rem;
+            }
+
+            .quote-card {
+                height: auto;
+                min-height: 220px;
+            }
+
+            .quote-front,
+            .quote-back {
+                padding: 1.5rem 1rem;
+            }
+
+            .quote-text {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                margin-bottom: 0.5rem;
+            }
+
+            .quote-author {
+                font-size: 1rem;
+                margin-top: 0.5rem;
+            }
+
+            .quote-icon {
+                font-size: 3rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .quote-hint {
+                font-size: 0.9rem;
             }
         }
     </style>

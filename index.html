@@ -506,6 +506,42 @@
             transform: scale(1.1);
             box-shadow: 0 8px 25px rgba(255, 0, 110, 0.6);
         }
+        /* ===== MOBILE QUOTE CARD FIX ===== */
+@media (max-width: 768px) {
+
+    .quote-card {
+        height: auto;
+        min-height: unset;
+    }
+
+    .quote-front,
+    .quote-back {
+        position: relative; /* remove absolute lock */
+        height: auto;
+    }
+
+    .quote-card.active .quote-back {
+        max-height: 70vh;          /* visible on phones */
+        overflow-y: auto;          /* scroll enabled */
+        padding-bottom: 2rem;
+    }
+
+    /* Smooth scrolling */
+    .quote-back {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Scrollbar styling (optional but nice) */
+    .quote-back::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .quote-back::-webkit-scrollbar-thumb {
+        background: rgba(255, 179, 217, 0.5);
+        border-radius: 10px;
+    }
+}
+
 
         /* Romantic Quotes - SLIDE REVEAL ANIMATION */
         .quotes-section {
@@ -2502,4 +2538,5 @@
     </script>
 </body>
 </html>
+
 

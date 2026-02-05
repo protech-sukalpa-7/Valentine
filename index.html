@@ -13,6 +13,7 @@
             --cream: #FFF5F7;
             --midnight: #1A0D1F;
             --gold: #FFD700;
+            --orange: #FF8C42;
         }
 
         * {
@@ -148,15 +149,23 @@
             margin: 4rem 0;
             animation: fadeIn 1.5s ease-out 1s both;
             flex-direction: column;
+            position: relative;
         }
 
         .heart-instruction {
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             color: var(--blush);
-            margin-bottom: 2rem;
             animation: fadeIn 2s ease-out 1.5s both;
             font-family: 'Dancing Script', cursive;
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            pointer-events: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: 700;
         }
 
         .beating-heart {
@@ -574,6 +583,8 @@
             font-size: 4rem;
             margin-bottom: 1rem;
             animation: iconPulse 2s ease-in-out infinite;
+            /* Changed color to orange using filter */
+            filter: hue-rotate(30deg) saturate(1.8) brightness(1.1);
         }
 
         @keyframes iconPulse {
@@ -1885,8 +1896,8 @@
         </div>
 
         <div class="heart-container">
-            <p class="heart-instruction">Tap the heart! 💖</p>
             <div class="beating-heart" onclick="toggleMusic(); createHearts(event)"></div>
+            <p class="heart-instruction">Tap this heart 💖</p>
 
             <!-- Kissing Video -->
             <div class="video-scene" onclick="openVideoShutter()">
@@ -1967,7 +1978,7 @@
                     <div class="letter-paper">
                         <h3>A Letter to My Heart</h3>
                         <p class="greeting">My Dearest Love,</p>
-                        <p>             রোজ সকালে তোরই ছোয়ায়, কাটবে আমার ঘুম। রিনিঝিনি নুপুর দোলায়, থাকবে ভরে রুম। ঘুড়ির সাথে লাগানো আছে, তোর মনের নাটাই, ভুল বুঝে করিসনা যেনো, হৃদয় থেকে ছাটাই."আদর দেবো, সোহাগ দেবো, দেবো ভালোবাসা, হাজার কষ্টেও পূরণ করব, মনের সকল আশা.</p>
+                        <p>             রোজ সকালে তোরই ছোয়ায়, কাটবে আমার ঘুম। রিনিঝিনি নুপুর দোলায়, থাকবে ভরে রুম। ঘুড়ির সাথে লাগানো আছে, তোর মনের নাটাই, ভুল বুঝে করিসনা যেনো, হৃদয় থেকে ছাটাই."আদর দেবো, সোহাগ দেবো, দেবো ভালোবাসা, হাজার কষ্টেও পূরণ করব, মনের সকল আশা.</p>
                         <p class="signature-text">Yours eternally, ❤️</p>
                     </div>
                 </div>
@@ -2029,7 +2040,7 @@
 
             <div class="quote-card" onclick="toggleQuote(this)">
                 <div class="quote-front">
-                    <div class="quote-icon"></div>
+                    <div class="quote-icon">🍁</div>
                     <p class="quote-hint">Click to reveal quote</p>
                 </div>
                 <div class="quote-back">

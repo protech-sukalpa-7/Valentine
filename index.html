@@ -669,12 +669,30 @@
                 opacity: 0;
             }
         }
-        /* ===== FIX MOBILE QUOTE TEXT CUTTING ===== */
+       /* ===== FINAL MOBILE QUOTE FIX (TEXT VISIBILITY) ===== */
 @media (max-width: 768px) {
+
+    .quote-front,
+    .quote-back {
+        justify-content: flex-start;   /* 🔥 KEY FIX */
+    }
+
+    .quote-back {
+        padding-top: 2.5rem;           /* prevents top cut */
+    }
+
     .quote-card {
+        height: auto;
         overflow: visible;
     }
+
+    .quote-card.active .quote-back {
+        max-height: 70vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 }
+
 
 
         /* ============================================
@@ -2545,6 +2563,7 @@
     </script>
 </body>
 </html>
+
 
 
 

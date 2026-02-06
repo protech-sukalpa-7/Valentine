@@ -549,10 +549,25 @@ body {
             z-index: 10001;
         }
 
-        .close-modal:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(255, 0, 110, 0.6);
-        }
+        .close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 0, 110, 0.95);
+    border: none;
+    color: white;
+    font-size: 1.6rem;
+    cursor: pointer;
+    z-index: 99999; /* 🔥 FIX */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(255, 0, 110, 0.6);
+}
+
         /* ===== MOBILE QUOTE CARD FIX ===== */
 @media (max-width: 768px) {
 
@@ -2334,7 +2349,12 @@ body {
     <!-- Video Modal -->
     <div class="video-modal" id="videoModal">
         <div class="video-modal-content">
-            <video id="loveVideo" controls>
+            <video id="loveVideo"autoplay
+            muted
+            playsinline
+            disablePictureInPicture
+            controlslist="nodownload noplaybackrate nofullscreen">
+
                 <source src="I_love_u.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -2554,42 +2574,36 @@ body {
         }
 
         // Show love notes (now shows video modal)
-        function showLoveNotes() {
-            const modal = document.getElementById('videoModal');
-            const video = document.getElementById('loveVideo');
+function showLoveNotes() {
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('loveVideo');
 
-            modal.classList.add('show');
+    modal.classList.add('show');
 
-            // Play the video when modal opens
-            video.currentTime = 0;
-            video.play();
+    video.currentTime = 0;
+    video.muted = false; // allow sound
+    video.play();
 
-            // Close modal automatically when video ends
-            video.onended = function() {
-                closeVideoModal();
-            };
+    // Auto close when video ends
+    video.onended = () => {
+        closeVideoModal();
+    };
 
-            // Create some hearts for effect
-            for(let i = 0; i < 15; i++) {
-                setTimeout(() => createRandomHeart(), i * 100);
-            }
-        }
+    // Visual hearts
+    for (let i = 0; i < 15; i++) {
+        setTimeout(() => createRandomHeart(), i * 100);
+    }
+}
 
         // Close video modal
-        function closeVideoModal() {
-            const modal = document.getElementById('videoModal');
-            const video = document.getElementById('loveVideo');
+function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('loveVideo');
 
-            modal.classList.remove('show');
-            video.pause();
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('videoModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeVideoModal();
-            }
-        });
+    video.pause();
+    video.currentTime = 0;
+    modal.classList.remove('show');
+}
 
         // Flip card function
         function flipCard(element) {
@@ -2635,7 +2649,6 @@ body {
     </script>
 </body>
 </html>
-
 
 
 

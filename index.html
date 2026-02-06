@@ -6,6 +6,38 @@
     <title>My Valentine 💝</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* ===============================
+   MOBILE TAP / CLICK FIX
+   =============================== */
+
+/* Disable blue tap highlight */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove focus outline on touch */
+*:focus {
+    outline: none !important;
+}
+
+/* Prevent text selection on interactive items */
+.beating-heart,
+.video-scene,
+.video-shutter,
+.quote-card,
+.landed-letter,
+.envelope-wrapper,
+.btn {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Disable callout menu on long press */
+body {
+    -webkit-touch-callout: none;
+}
+
         :root {
             --rose: #FF006E;
             --deep-rose: #C8005C;
@@ -29,6 +61,8 @@
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
+                scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
         }
 
         /* Animated gradient overlay */
@@ -51,6 +85,14 @@
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.7; transform: scale(1.1); }
         }
+        /* Improve scroll performance */
+.container,
+.postman-scene,
+.quotes-section,
+.memories-section {
+    will-change: transform;
+}
+
 
         /* Floating particles */
         .particle {
@@ -221,6 +263,11 @@
         }
 
         /* Video Scene */
+        video {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
         .video-scene {
             margin-top: 2rem;
             animation: fadeIn 2s ease-out 2s both;
@@ -1977,6 +2024,20 @@
                 font-size: 0.9rem;
             }
         }
+        /* ===============================
+   TOUCH DEVICE HOVER FIX
+   =============================== */
+@media (hover: none) {
+    .beating-heart:hover,
+    .btn:hover,
+    .social-link:hover,
+    .landed-letter:hover,
+    .memory-item:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -2333,7 +2394,8 @@
         }
 
         // Add scroll event listener
-        window.addEventListener('scroll', checkPostmanScroll);
+        window.addEventListener('scroll', checkPostmanScroll, { passive: true });
+
         
         // Check on page load in case already scrolled
         window.addEventListener('load', checkPostmanScroll);
@@ -2573,6 +2635,7 @@
     </script>
 </body>
 </html>
+
 
 
 

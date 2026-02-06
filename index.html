@@ -2052,6 +2052,24 @@ body {
         box-shadow: none !important;
     }
 }
+.video-modal-content {
+    animation: cinematicZoom 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cinematicZoom {
+    0% {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 
     </style>
 </head>
@@ -2581,19 +2599,19 @@ function showLoveNotes() {
     modal.classList.add('show');
 
     video.currentTime = 0;
-    video.muted = false; // allow sound
+    video.muted = false;
     video.play();
 
-    // Auto close when video ends
-    video.onended = () => {
-        closeVideoModal();
-    };
+    fadeInAudio(video);        // 🎵 fade-in sound
 
-    // Visual hearts
-    for (let i = 0; i < 15; i++) {
-        setTimeout(() => createRandomHeart(), i * 100);
-    }
+    video.onended = () => {
+        burstHeartsAtCenter(); // ❤️ finale
+        setTimeout(() => {
+            closeVideoModal(); // auto close
+        },);
+    };
 }
+
 
         // Close video modal
 function closeVideoModal() {
@@ -2625,6 +2643,49 @@ function closeVideoModal() {
                 setTimeout(() => createRandomHeart(), i * 50);
             }
         }
+        function fadeInAudio(video, duration = 1200) {
+    video.volume = 0;
+    let step = 0.05;
+    let interval = duration / (1 / step);
+
+    const fade = setInterval(() => {
+        if (video.volume < 1) {
+            video.volume = Math.min(1, video.volume + step);
+        } else {
+            clearInterval(fade);
+        }
+    }, interval);
+}
+const videoModal = document.getElementById('videoModal');
+const loveVideo = document.getElementById('loveVideo');
+
+videoModal.addEventListener('click', (e) => {
+    if (e.target === loveVideo) {
+        if (loveVideo.paused) {
+            loveVideo.play();
+        } else {
+            loveVideo.pause();
+        }
+    }
+});
+function burstHeartsAtCenter(count = 30) {
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = ['💖','💝','💗','💕','❤️','💞'][Math.floor(Math.random() * 6)];
+            heart.style.left = cx + (Math.random() - 0.5) * 200 + 'px';
+            heart.style.top = cy + (Math.random() - 0.5) * 200 + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 3000);
+        }, i * 40);
+    }
+}
+
 
         // Sparkle on mouse move
         let sparkleTimeout;
